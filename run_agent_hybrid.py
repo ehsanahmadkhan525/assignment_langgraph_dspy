@@ -15,19 +15,11 @@ load_dotenv()
 def run(batch, out):
     """Run the Retail Analytics Copilot."""
     
-    # Setup DSPy with OpenAI
-    lm = dspy.LM(model='gpt-4o-mini', max_tokens=2000)
+    # Setup DSPy with Ollama (DSPy 3.x syntax)
+    lm = dspy.LM(model='ollama/phi3.5:3.8b-mini-instruct-q4_K_M', api_base='http://localhost:11434')
     
-    # Ollama configuration (commented out for faster execution)
-    # try:
-    #     lm = dspy.LM(model='ollama/phi3.5:3.8b-mini-instruct-q4_K_M', api_base='http://localhost:11434')
-    # except AttributeError:
-    #     # Fallback for older/different versions
-    #     try:
-    #         lm = dspy.OllamaLocal(model='phi3.5:3.8b-mini-instruct-q4_K_M', max_tokens=1000)
-    #     except AttributeError:
-    #          # Try dspy.Ollama
-    #         lm = dspy.Ollama(model='phi3.5:3.8b-mini-instruct-q4_K_M', max_tokens=1000)
+    # OpenAI configuration (faster, but requires API key)
+    # lm = dspy.LM(model='gpt-4o-mini', max_tokens=2000)
             
     dspy.configure(lm=lm)
     
